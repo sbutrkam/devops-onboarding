@@ -1,10 +1,25 @@
 pipeline {
     agent any
 
+    environment {
+        E2E_MODE = "ci"
+        DEV = "dev"
+        ALPHA = "alpha"
+        PREPROD = "preprod"
+    }
+
+    parameters {
+        string(name: 'VERSION', description: 'The commit target to build.', defaultValue: 'latest')
+        booleanParam(name: 'ENABLE_CONTRACT_TEST', description: 'Enable contract testing (will remove this after contract is updated)', defaultValue: false)
+        
+    }
+
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh """
+                echo 'Building..${DEV}'
+                """
             }
         }
         stage('Test') {
@@ -14,7 +29,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                sh """
+                echo 'Deploying....${params.VERSION}'
+                """
             }
         }
     }
