@@ -46,12 +46,12 @@ pipeline {
         }
         stage('Close Web') {
             steps {
-                dir("${SCRIPTS_PATH}") {
+                dir("${PROJECT_PATH}") {
                    sh """
                     echo "Close"
                     """
                 }
-                sh "./application-management.sh close"
+                sh "kill $(lsof -t -i:3000)"
             }
         }
     }
