@@ -6,6 +6,7 @@ pipeline {
     environment {
         PROJECT_PATH="${env.JENKINS_HOME}/workspace/onboarding-3/testing-strategy-3"
         SCRIPTS_PATH="${PROJECT_PATH}/scripts"
+        WEB_PATH="${PROJECT_PATH}/web"
         DEV="dev"
         ALPHA="alpha"
         PREPROD="preprod"
@@ -13,16 +14,28 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('install') {
            steps {
                 dir("${SCRIPTS_PATH}") {
                     sh """
-                    echo "Build"
+                    echo "install"
                     """
                     sh "npm install -g yarn"
-                    sh "./install.sh"
-                    sh "./application-management.sh build"
-                    sh "./application-management.sh start &&"
+                    ./install.sh
+                    ./application-management.sh build
+                    ./application-management.sh start &&
+                }
+            }
+        }
+        stage('Build') {
+           steps {
+                dir("${WEB_PATH}") {
+                    sh """
+                    echo "Build"
+                    """
+                    // sh "npm run start &&"
+                    // sh "./application-management.sh build"
+                    // sh "./application-management.sh start &&"
                 }
             }
         }
