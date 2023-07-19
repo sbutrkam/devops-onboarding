@@ -41,6 +41,7 @@ pipeline {
                     echo "Testing"
                     """
                     sh "npm run test"
+                    sh "npm run generate-report"
                 }
             }
         }
