@@ -42,7 +42,6 @@ pipeline {
                    sh """
                     echo "Testing"
                     """
-                    sh "cd ../e2e-web && yarn test"
                 }
             }
         }
@@ -53,7 +52,7 @@ pipeline {
                     echo "Close"
                     """
                 }
-                sh "./application-management.sh close"
+                ./application-management.sh close
             }
         }
     }
