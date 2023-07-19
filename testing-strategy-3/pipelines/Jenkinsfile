@@ -31,8 +31,6 @@ pipeline {
                     echo "Start Web"
                     """
                     sh "npm run start &&"
-                    // sh "./application-management.sh build"
-                    // sh "./application-management.sh start &&"
                 }
             }
         }
