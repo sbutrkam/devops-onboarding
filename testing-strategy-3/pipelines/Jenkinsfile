@@ -15,11 +15,11 @@ pipeline {
     stages {
         stage('Build') {
            steps {
-                dir("${SCRIPTS_PATH}") {
+                dir("${SCRIPTS_PATH}/web") {
                     sh """
                     echo "Build"
                     """
-                    sh "cd web & yarn install"
+                    sh "npm install"
                 }
             }
         }
