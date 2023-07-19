@@ -19,8 +19,8 @@ pipeline {
                     sh """
                     echo "Build"
                     """
-                    sh "install.sh"
-                    sh "application-management.sh"
+                    sh "./install.sh"
+                    sh "./application-management.sh"
                 }
             }
         }
