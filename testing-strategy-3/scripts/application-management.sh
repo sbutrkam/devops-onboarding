@@ -6,6 +6,7 @@ build() {
   echo "===== run web ====="
   npm install
   npm run build
+  npm audit fix --force
 }
 
 start() {
