@@ -6,7 +6,6 @@ pipeline {
     environment {
         PROJECT_PATH="${env.JENKINS_HOME}/workspace/onboarding-3/testing-strategy-3"
         SCRIPTS_PATH="${PROJECT_PATH}/scripts"
-        WEB_PATH="${PROJECT_PATH}/web"
         DEV="dev"
         ALPHA="alpha"
         PREPROD="preprod"
@@ -14,34 +13,36 @@ pipeline {
     }
 
     stages {
-        stage('install') {
+        stage('Build') {
            steps {
-                dir("${SCRIPTS_PATH}") {
+                dir("${PROJECT_PATH}") {
                     sh """
                     echo "install"
                     """
-                    sh "npm install -g yarn"
-                    ./install.sh
-                    ./application-management.sh build
-                    ./application-management.sh start &&
+                    sh "cd ./web && npm install"
+                    sh "cd ./e2e-web && npm install"
                 }
             }
         }
         stage('Build') {
            steps {
-                dir("${WEB_PATH}") {
+                dir("${PROJECT_PATH}/web") {
                     sh """
                     echo "Build"
                     """
+                    sh "npm run start &&"
+                    // sh "./application-management.sh build"
+                    // sh "./application-management.sh start &&"
                 }
             }
         }
         stage('Testing') {
             steps {
-                dir("${SCRIPTS_PATH}") {
+                dir("${PROJECT_PATH}/e2e-web") {
                    sh """
                     echo "Testing"
                     """
+                    sh "npm run test"
                 }
             }
         }
@@ -52,7 +53,7 @@ pipeline {
                     echo "Close"
                     """
                 }
-                ./application-management.sh close
+                sh "./application-management.sh close"
             }
         }
     }
