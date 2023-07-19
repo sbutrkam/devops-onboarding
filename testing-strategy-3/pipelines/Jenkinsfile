@@ -4,7 +4,7 @@ pipeline {
     tools {nodejs "NodeJS"}
 
     environment {
-        PROJECT_PATH="${env.JENKINS_HOME}/workspace/OnBoarding 3/testing-strategy-3"
+        PROJECT_PATH="${env.JENKINS_HOME}/workspace/OnBoarding\ 3/testing-strategy-3"
         SCRIPTS_PATH="${PROJECT_PATH}/scripts"
         DEV="dev"
         ALPHA="alpha"
@@ -15,11 +15,12 @@ pipeline {
     stages {
         stage('Build') {
            steps {
-                dir("${SCRIPTS_PATH}/web") {
+                dir("${SCRIPTS_PATH}") {
                     sh """
                     echo "Build"
                     """
-                    sh "npm install"
+                    sh "install.sh"
+                    sh "application-management.sh"
                 }
             }
         }
