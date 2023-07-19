@@ -19,6 +19,7 @@ pipeline {
                     sh """
                     echo "Build"
                     """
+                    sh "npm install -g yarn"
                     sh "./install.sh"
                     sh "./application-management.sh"
                 }
