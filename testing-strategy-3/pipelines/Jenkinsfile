@@ -51,7 +51,7 @@ pipeline {
                     echo "Close"
                     """
                 }
-                sh "kill $(lsof -t -i:3000)"
+                sh "kill \$(lsof -t -i:3000)"
             }
         }
     }
