@@ -33,9 +33,6 @@ pipeline {
                     sh """
                     echo "Build"
                     """
-                    // sh "npm run start &&"
-                    // sh "./application-management.sh build"
-                    // sh "./application-management.sh start &&"
                 }
             }
         }
