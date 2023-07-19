@@ -32,7 +32,7 @@ pipeline {
                    sh """
                     echo "Testing"
                     """
-                    sh "cd ${path/scripts/}/e2e-web && yarn test"
+                    sh "cd ../e2e-web && yarn test"
                 }
             }
         }
