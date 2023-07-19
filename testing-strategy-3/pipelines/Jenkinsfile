@@ -21,26 +21,29 @@ pipeline {
                     """
                     sh "npm install -g yarn"
                     sh "./install.sh"
-                    sh "./application-management.sh"
+                    sh "./application-management.sh build"
+                    sh "./application-management.sh start"
                 }
             }
         }
-        stage('Test environment DEV') {
+        stage('Testing') {
             steps {
                 dir("${SCRIPTS_PATH}") {
                    sh """
-                    echo "Test"
+                    echo "Testing"
                     """
+                    sh "cd ${path/scripts/}/e2e-web && yarn test"
                 }
             }
         }
-        stage('Deployment') {
+        stage('Close') {
             steps {
                 dir("${SCRIPTS_PATH}") {
                    sh """
-                    echo "Deployment"
+                    echo "Close"
                     """
                 }
+                sh "./application-management.sh close"
             }
         }
     }
