@@ -22,7 +22,7 @@ pipeline {
                     sh "npm install -g yarn"
                     sh "./install.sh"
                     sh "./application-management.sh build"
-                    sh "./application-management.sh start"
+                    sh "./application-management.sh start &&"
                 }
             }
         }
